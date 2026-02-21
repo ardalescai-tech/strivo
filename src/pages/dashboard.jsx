@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { getData, setData, getTodayKey, getYesterdayKey } from '../data/storage'
+import { getData, setData, getTodayKey, getYesterdayKey, recalculateStreak } from '../data/storage'
 import './Dashboard.css'
 
 const DEFAULT_TASKS = [
@@ -43,7 +43,7 @@ function Dashboard() {
   const loadData = async () => {
     const todayKey = getTodayKey()
     const todayData = await getData(todayKey)
-    const streakData = await getData('streak') || 0
+    const streakData = await recalculateStreak()
     const yesterdayData = await getData(getYesterdayKey())
     const savedTemplate = await getData('task_template')
 
@@ -124,8 +124,8 @@ function Dashboard() {
     await setData(todayKey, { tasks: updatedTasks, isRestDay })
     const allDone = updatedTasks.every(t => t.done)
     if (allDone) {
-      await setData('streak', streak + 1)
-      setStreak(streak + 1)
+      const newStreak = await recalculateStreak()
+      setStreak(newStreak)
     }
   }
 
