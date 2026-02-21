@@ -1,5 +1,4 @@
-const { app, BrowserWindow } = require('electron')
-const path = require('path')
+const { app, BrowserWindow, Notification } = require('electron')
 
 function createWindow() {
   const win = new BrowserWindow({
@@ -11,7 +10,7 @@ function createWindow() {
     }
   })
 
- win.loadURL('http://localhost:5173')
+  win.loadURL('http://localhost:5173')
 }
 
 app.whenReady().then(() => {
