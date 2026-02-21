@@ -1,0 +1,79 @@
+.history {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.history-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.empty {
+  color: #555;
+  font-size: 15px;
+}
+
+.history-card {
+  background: #1a1a1a;
+  border: 1px solid #2a2a2a;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.history-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.history-header:hover {
+  background: #222;
+}
+
+.history-date {
+  display: block;
+  font-size: 15px;
+  color: #ddd;
+  margin-bottom: 4px;
+  text-transform: capitalize;
+}
+
+.history-status {
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.history-arrow {
+  color: #555;
+  font-size: 12px;
+}
+
+.history-tasks {
+  border-top: 1px solid #2a2a2a;
+  padding: 16px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.history-task {
+  font-size: 14px;
+  color: #666;
+}
+
+.history-task.done {
+  color: #aaa;
+}
+
+.history-note {
+  margin-top: 4px;
+  font-size: 13px;
+  color: #555;
+  font-style: italic;
+  padding-left: 20px;
+}
