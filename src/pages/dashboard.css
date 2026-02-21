@@ -12,11 +12,30 @@
   border: 1px solid #2a4a8a;
   border-radius: 16px;
   padding: 24px 32px;
+  position: relative;
+  overflow: hidden;
+}
+
+.streak-banner::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(79, 142, 247, 0.08) 0%, transparent 60%);
+  animation: glow 3s ease-in-out infinite;
+}
+
+@keyframes glow {
+  0%, 100% { transform: scale(1); opacity: 0.5; }
+  50% { transform: scale(1.1); opacity: 1; }
 }
 
 .streak-fire {
   font-size: 48px;
   animation: pulse 1.5s infinite;
+  filter: drop-shadow(0 0 8px rgba(249, 115, 22, 0.6));
 }
 
 @keyframes pulse {
@@ -37,18 +56,51 @@
   font-weight: 500;
 }
 
-.yesterday-bar {
-  display: flex;
-  gap: 24px;
+.comparison-bar {
   background: #1a1a1a;
+  border: 1px solid #2a2a2a;
   border-radius: 12px;
-  padding: 16px 24px;
-  font-size: 15px;
-  color: #888;
+  padding: 20px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
 }
 
-.better { color: #4caf50; font-weight: 700; }
-.worse { color: #f44336; font-weight: 700; }
+.comparison-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.comparison-label {
+  font-size: 13px;
+  color: #666;
+  width: 32px;
+}
+
+.comparison-track {
+  flex: 1;
+  height: 8px;
+  background: #2a2a2a;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.comparison-fill {
+  height: 100%;
+  border-radius: 4px;
+  transition: width 0.6s ease;
+}
+
+.comparison-fill.yesterday { background: #555; }
+.comparison-fill.today { background: #4f8ef7; }
+
+.comparison-percent {
+  font-size: 13px;
+  font-weight: 700;
+  width: 48px;
+  text-align: right;
+}
 
 .tasks-header {
   display: flex;
@@ -121,11 +173,62 @@
 .task-label {
   font-size: 16px;
   color: #ddd;
+  flex: 1;
+  cursor: default;
 }
 
 .task-card.done .task-label {
   text-decoration: line-through;
   color: #555;
+}
+
+.task-edit-input {
+  flex: 1;
+  background: #111;
+  border: 1px solid #4f8ef7;
+  border-radius: 6px;
+  padding: 4px 10px;
+  color: #fff;
+  font-size: 16px;
+  outline: none;
+}
+
+.task-time {
+  background: transparent;
+  border: 1px solid #2a2a2a;
+  border-radius: 8px;
+  padding: 5px 12px;
+  color: #666;
+  font-size: 12px;
+  outline: none;
+  cursor: pointer;
+  transition: all 0.2s;
+  width: 90px;
+}
+
+.task-time:focus {
+  border-color: #4f8ef7;
+  color: #fff;
+  background: #111;
+}
+
+.task-time::-webkit-calendar-picker-indicator {
+  display: none;
+}
+
+.task-delete {
+  background: transparent;
+  border: none;
+  color: #444;
+  font-size: 14px;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 4px;
+  transition: color 0.2s;
+}
+
+.task-delete:hover {
+  color: #f44336;
 }
 
 .task-note {
@@ -142,95 +245,6 @@
 
 .task-note:focus {
   border-color: #4f8ef7;
-}
-
-.comparison-bar {
-  background: #1a1a1a;
-  border: 1px solid #2a2a2a;
-  border-radius: 12px;
-  padding: 20px 24px;
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-}
-
-.comparison-item {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-}
-
-.comparison-label {
-  font-size: 13px;
-  color: #666;
-  width: 32px;
-}
-
-.comparison-track {
-  flex: 1;
-  height: 8px;
-  background: #2a2a2a;
-  border-radius: 4px;
-  overflow: hidden;
-}
-
-.comparison-fill {
-  height: 100%;
-  border-radius: 4px;
-  transition: width 0.6s ease;
-}
-
-.comparison-fill.yesterday { background: #555; }
-.comparison-fill.today { background: #4f8ef7; }
-
-.comparison-percent {
-  font-size: 13px;
-  font-weight: 700;
-  width: 48px;
-  text-align: right;
-}
-
-.task-time {
-  margin-left: auto;
-  background: #111;
-  border: 1px solid #2a2a2a;
-  border-radius: 6px;
-  padding: 6px 10px;
-  color: #888;
-  font-size: 13px;
-  outline: none;
-  cursor: pointer;
-}
-
-.task-time:focus {
-  border-color: #4f8ef7;
-  color: #fff;
-}
-
-.task-edit-input {
-  flex: 1;
-  background: #111;
-  border: 1px solid #4f8ef7;
-  border-radius: 6px;
-  padding: 4px 10px;
-  color: #fff;
-  font-size: 16px;
-  outline: none;
-}
-
-.task-delete {
-  background: transparent;
-  border: none;
-  color: #444;
-  font-size: 14px;
-  cursor: pointer;
-  padding: 4px 8px;
-  border-radius: 4px;
-  transition: color 0.2s;
-}
-
-.task-delete:hover {
-  color: #f44336;
 }
 
 .add-task-row {
@@ -268,38 +282,4 @@
 
 .add-task-btn:hover {
   background: #3a7de0;
-}
-
-.streak-banner {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  background: linear-gradient(135deg, #1a2a4a, #0f1a2e);
-  border: 1px solid #2a4a8a;
-  border-radius: 16px;
-  padding: 24px 32px;
-  position: relative;
-  overflow: hidden;
-}
-
-.streak-banner::before {
-  content: '';
-  position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: radial-gradient(circle, rgba(79, 142, 247, 0.08) 0%, transparent 60%);
-  animation: glow 3s ease-in-out infinite;
-}
-
-@keyframes glow {
-  0%, 100% { transform: scale(1); opacity: 0.5; }
-  50% { transform: scale(1.1); opacity: 1; }
-}
-
-.streak-fire {
-  font-size: 48px;
-  animation: pulse 1.5s infinite;
-  filter: drop-shadow(0 0 8px rgba(249, 115, 22, 0.6));
 }

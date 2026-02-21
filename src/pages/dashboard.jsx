@@ -204,12 +204,19 @@ function Dashboard() {
                   </span>
                 )}
                 {!task.done && (
-                  <input
-                    type="time"
-                    className="task-time"
-                    value={task.time || ''}
-                    onChange={e => updateTime(task.id, e.target.value)}
-                  />
+                  <button
+                    className={`task-time-btn ${task.time ? 'has-time' : ''}`}
+                    onClick={() => document.getElementById(`time-${task.id}`).showPicker()}
+                  >
+                    {task.time ? `⏰ ${task.time}` : '⏰'}
+                    <input
+                      type="time"
+                      id={`time-${task.id}`}
+                      className="task-time-hidden"
+                      value={task.time || ''}
+                      onChange={e => updateTime(task.id, e.target.value)}
+                    />
+                  </button>
                 )}
                 {!task.done && (
                   <button className="task-delete" onClick={() => deleteTask(task.id)}>✕</button>
