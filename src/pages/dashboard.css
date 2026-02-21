@@ -143,3 +143,49 @@
 .task-note:focus {
   border-color: #4f8ef7;
 }
+
+.comparison-bar {
+  background: #1a1a1a;
+  border: 1px solid #2a2a2a;
+  border-radius: 12px;
+  padding: 20px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.comparison-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.comparison-label {
+  font-size: 13px;
+  color: #666;
+  width: 32px;
+}
+
+.comparison-track {
+  flex: 1;
+  height: 8px;
+  background: #2a2a2a;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.comparison-fill {
+  height: 100%;
+  border-radius: 4px;
+  transition: width 0.6s ease;
+}
+
+.comparison-fill.yesterday { background: #555; }
+.comparison-fill.today { background: #4f8ef7; }
+
+.comparison-percent {
+  font-size: 13px;
+  font-weight: 700;
+  width: 48px;
+  text-align: right;
+}

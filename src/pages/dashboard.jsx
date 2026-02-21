@@ -82,13 +82,25 @@ function Dashboard() {
       </div>
 
       {yesterdayScore !== null && (
-        <div className="yesterday-bar">
-          <span>Ieri: {yesterdayScore}%</span>
-          <span className={todayScore >= yesterdayScore ? 'better' : 'worse'}>
-            Azi: {todayScore}% {todayScore >= yesterdayScore ? '↑' : '↓'}
-          </span>
-        </div>
-      )}
+  <div className="comparison-bar">
+    <div className="comparison-item">
+      <span className="comparison-label">Ieri</span>
+      <div className="comparison-track">
+        <div className="comparison-fill yesterday" style={{ width: `${yesterdayScore}%` }} />
+      </div>
+      <span className="comparison-percent">{yesterdayScore}%</span>
+    </div>
+    <div className="comparison-item">
+      <span className="comparison-label">Azi</span>
+      <div className="comparison-track">
+        <div className="comparison-fill today" style={{ width: `${todayScore}%` }} />
+      </div>
+      <span className="comparison-percent" style={{ color: todayScore >= yesterdayScore ? '#4caf50' : '#f44336' }}>
+        {todayScore}% {todayScore >= yesterdayScore ? '↑' : '↓'}
+      </span>
+    </div>
+  </div>
+)}
 
       <div className="tasks-section">
         <div className="tasks-header">
