@@ -269,3 +269,37 @@
 .add-task-btn:hover {
   background: #3a7de0;
 }
+
+.streak-banner {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: linear-gradient(135deg, #1a2a4a, #0f1a2e);
+  border: 1px solid #2a4a8a;
+  border-radius: 16px;
+  padding: 24px 32px;
+  position: relative;
+  overflow: hidden;
+}
+
+.streak-banner::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(79, 142, 247, 0.08) 0%, transparent 60%);
+  animation: glow 3s ease-in-out infinite;
+}
+
+@keyframes glow {
+  0%, 100% { transform: scale(1); opacity: 0.5; }
+  50% { transform: scale(1.1); opacity: 1; }
+}
+
+.streak-fire {
+  font-size: 48px;
+  animation: pulse 1.5s infinite;
+  filter: drop-shadow(0 0 8px rgba(249, 115, 22, 0.6));
+}
