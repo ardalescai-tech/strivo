@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { getData, setData, getTodayKey, getYesterdayKey, recalculateStreak } from '../data/storage'
+import { getRandomMessage, messagesZiRatata, messagesZiBuna } from '../data/messages'
 import './Dashboard.css'
 
 const DEFAULT_TASKS = [
@@ -18,6 +19,7 @@ function Dashboard() {
   const [newTaskLabel, setNewTaskLabel] = useState('')
   const [editingId, setEditingId] = useState(null)
   const [editingLabel, setEditingLabel] = useState('')
+  const [startupMessage, setStartupMessage] = useState(null)
 
   useEffect(() => {
     loadData()
@@ -57,9 +59,19 @@ function Dashboard() {
     }
 
     setStreak(streakData)
+
     if (yesterdayData) {
       const done = yesterdayData.tasks.filter(t => t.done).length
-      setYesterdayScore(Math.round((done / yesterdayData.tasks.length) * 100))
+      const total = yesterdayData.tasks.length
+      const score = Math.round((done / total) * 100)
+      setYesterdayScore(score)
+
+      if (!yesterdayData.isRestDay && done < total) {
+        setStartupMessage({
+          text: getRandomMessage(messagesZiRatata),
+          type: 'rau'
+        })
+      }
     }
   }
 
@@ -141,6 +153,15 @@ function Dashboard() {
 
   return (
     <div className="page dashboard">
+
+      {startupMessage && (
+        <div className={`startup-message ${startupMessage.type}`}>
+          <span className="startup-icon">💀</span>
+          <p>{startupMessage.text}</p>
+          <button className="startup-close" onClick={() => setStartupMessage(null)}>✕</button>
+        </div>
+      )}
+
       <div className="streak-banner">
         <span className="streak-fire">🔥</span>
         <span className="streak-count">{streak}</span>

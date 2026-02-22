@@ -283,3 +283,48 @@
 .add-task-btn:hover {
   background: #3a7de0;
 }
+
+.startup-message {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 20px;
+  border-radius: 12px;
+  position: relative;
+  animation: slideIn 0.4s ease;
+}
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.startup-message.rau {
+  background: #1a0a0a;
+  border: 1px solid #f44336;
+}
+
+.startup-icon {
+  font-size: 28px;
+}
+
+.startup-message p {
+  flex: 1;
+  font-size: 15px;
+  color: #ccc;
+  font-style: italic;
+}
+
+.startup-close {
+  background: transparent;
+  border: none;
+  color: #555;
+  font-size: 16px;
+  cursor: pointer;
+  padding: 4px 8px;
+  transition: color 0.2s;
+}
+
+.startup-close:hover {
+  color: #fff;
+}
